@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Event · Academic Campus</title>
+  <!-- Bootstrap 5 + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="static/style/style.css">
+</head>
+<body>
+  <!-- ============================================================
+       Navigation (新版本 - 支持登录/登出)
+       ============================================================ -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <i class="bi bi-mortarboard-fill me-2"></i>Academic Campus
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" 
+              aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="event-create.html">Create Event</a></li>
+          <li class="nav-item"><a class="nav-link" href="booking-history.html">My Bookings</a></li>
+          <!-- 登录（未登录时显示） -->
+          <li class="nav-item" id="loginNavItem">
+            <a class="nav-link" href="login.html"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a>
+          </li>
+          <!-- 用户下拉菜单（登录后显示，默认隐藏） -->
+          <li class="nav-item dropdown d-none" id="userDropdownItem">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+              <i class="bi bi-person-circle me-1"></i><span id="userDisplayName">Student</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+              <li><a class="dropdown-item" href="booking-history.html"><i class="bi bi-clock-history me-2"></i>My Bookings</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       Main Content
+       ============================================================ -->
+  <main class="container py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-10 col-xl-8">
+        <div class="card border-0 shadow-sm">
+          <div class="card-header bg-primary text-white py-3">
+            <h4 class="fw-semibold mb-0"><i class="bi bi-plus-circle me-2"></i>Create new academic event</h4>
+            <small class="text-white-50">Fill in the details below to publish a new course, lecture, or seminar.</small>
+          </div>
+          <div class="card-body p-4">
+            <form id="createEventForm" novalidate>
+              <!-- basic information -->
+              <h5 class="fw-semibold border-bottom pb-2 mb-3"><i class="bi bi-info-circle me-2 text-primary"></i>Basic information</h5>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="eventTitle" class="form-label fw-semibold">Event title <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="eventTitle" placeholder="e.g. Introduction to Machine Learning" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="eventCategory" class="form-label fw-semibold">Category <span class="text-danger">*</span></label>
+                  <select class="form-select" id="eventCategory" required>
+                    <option value="">Select category</option>
+                    <option value="lecture">Lecture</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="exam">Exam</option>
+                    <option value="tutorial">Tutorial</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="symposium">Symposium</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="eventInstructor" class="form-label fw-semibold">Instructor name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="eventInstructor" placeholder="e.g. Dr. Jane Smith" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="eventVenue" class="form-label fw-semibold">Venue / location <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="eventVenue" placeholder="e.g. Room 302, CS Building" required>
+                </div>
+              </div>
+
+              <hr class="my-4">
+
+              <!-- date & time -->
+              <h5 class="fw-semibold border-bottom pb-2 mb-3"><i class="bi bi-calendar3 me-2 text-primary"></i>Schedule</h5>
+              
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label for="eventDate" class="form-label fw-semibold">Date <span class="text-danger">*</span></label>
+                  <input type="date" class="form-control" id="eventDate" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="eventStartTime" class="form-label fw-semibold">Start time <span class="text-danger">*</span></label>
+                  <input type="time" class="form-control" id="eventStartTime" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="eventEndTime" class="form-label fw-semibold">End time <span class="text-danger">*</span></label>
+                  <input type="time" class="form-control" id="eventEndTime" required>
+                </div>
+              </div>
+
+              <hr class="my-4">
+
+              <!-- capacity & details -->
+              <h5 class="fw-semibold border-bottom pb-2 mb-3"><i class="bi bi-ticket-perforated me-2 text-primary"></i>Capacity &amp; details</h5>
+              
+              <div class="row g-3">
+                <div class="col-md-4">
+                  <label for="eventCapacity" class="form-label fw-semibold">Seats available <span class="text-danger">*</span></label>
+                  <input type="number" class="form-control" id="eventCapacity" placeholder="e.g. 50" min="1" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="eventPrice" class="form-label fw-semibold">Price (AUD)</label>
+                  <input type="number" class="form-control" id="eventPrice" placeholder="0.00" step="0.01" min="0">
+                </div>
+                <div class="col-md-4">
+                  <label for="eventStatus" class="form-label fw-semibold">Initial status</label>
+                  <select class="form-select" id="eventStatus">
+                    <option value="open" selected>Open</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="cancelled">Cancelled</option>
+                  </select>
+                  <small class="text-muted">Status will be managed automatically, but you can set an initial value.</small>
+                </div>
+              </div>
+
+              <hr class="my-4">
+
+              <!-- description & image -->
+              <h5 class="fw-semibold border-bottom pb-2 mb-3"><i class="bi bi-image me-2 text-primary"></i>Description &amp; media</h5>
+              
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="eventDescription" class="form-label fw-semibold">Description <span class="text-danger">*</span></label>
+                  <textarea class="form-control" id="eventDescription" rows="5" placeholder="Provide a detailed description of the event, including learning outcomes, target audience, and any special requirements..." required></textarea>
+                </div>
+                <div class="col-12">
+                  <label for="eventImage" class="form-label fw-semibold">Image URL</label>
+                  <input type="url" class="form-control" id="eventImage" placeholder="https://example.com/image.jpg">
+                  <small class="text-muted">Paste a link to an image for the event banner (optional).</small>
+                </div>
+              </div>
+
+              <hr class="my-4">
+
+              <!-- additional academic fields -->
+              <h5 class="fw-semibold border-bottom pb-2 mb-3"><i class="bi bi-file-earmark-text me-2 text-primary"></i>Academic details</h5>
+              
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="eventCredits" class="form-label fw-semibold">Credit points</label>
+                  <input type="number" class="form-control" id="eventCredits" placeholder="e.g. 3" step="0.5" min="0">
+                </div>
+                <div class="col-md-6">
+                  <label for="eventPrereq" class="form-label fw-semibold">Prerequisites</label>
+                  <input type="text" class="form-control" id="eventPrereq" placeholder="e.g. Basic Python knowledge">
+                </div>
+              </div>
+
+              <!-- submit actions -->
+              <div class="d-flex flex-wrap gap-2 justify-content-end mt-4 pt-3 border-top">
+                <button type="reset" class="btn btn-outline-secondary"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset</button>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#previewModal"><i class="bi bi-eye me-1"></i>Preview</button>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-check-circle me-1"></i>Create event</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- quick tip -->
+        <div class="alert alert-info mt-3 d-flex align-items-center" role="alert">
+          <i class="bi bi-info-circle-fill me-2 fs-5"></i>
+          <div><strong>Note:</strong> Only logged-in teachers can create events. All fields marked with <span class="text-danger">*</span> are required.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Preview modal -->
+  <div class="modal fade" id="previewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-semibold"><i class="bi bi-eye me-2"></i>Event preview</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center p-4 bg-light rounded">
+            <i class="bi bi-image text-secondary" style="font-size: 4rem;"></i>
+            <p class="mt-2 text-muted">Preview of your event card will appear here once you fill in the form.</p>
+            <div class="border rounded p-3 bg-white text-start">
+              <h6 class="fw-bold" id="previewTitle">[Event title]</h6>
+              <p><span class="badge bg-success" id="previewCategory">Category</span></p>
+              <p><i class="bi bi-person me-1"></i> <span id="previewInstructor">[Instructor]</span></p>
+              <p><i class="bi bi-geo-alt me-1"></i> <span id="previewVenue">[Venue]</span></p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="successToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="d-flex">
+        <div class="toast-body">
+          <i class="bi bi-check-circle-fill me-2"></i> Event created successfully!
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <footer class="bg-light border-top mt-5 py-3">
+    <div class="container text-center text-muted small">
+      &copy; 2026 Academic Campus · Event Management System · for IFQ557 assessment
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- ============================================================
+       登录状态切换脚本
+       ============================================================ -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 检查 URL 参数，判断是否从登录页跳转过来
+      const urlParams = new URLSearchParams(window.location.search);
+      const loggedIn = urlParams.get('loggedIn');
+      const studentId = urlParams.get('studentId') || 'Student';
+
+      // 获取 DOM 元素
+      const loginNavItem = document.getElementById('loginNavItem');
+      const userDropdownItem = document.getElementById('userDropdownItem');
+      const userDisplayName = document.getElementById('userDisplayName');
+      const logoutBtn = document.getElementById('logoutBtn');
+
+      if (loggedIn === 'true') {
+        // ===== 登录状态：显示用户菜单，隐藏登录按钮 =====
+        loginNavItem.classList.add('d-none');
+        userDropdownItem.classList.remove('d-none');
+        userDisplayName.textContent = studentId;
+      } else {
+        // ===== 未登录状态：显示登录按钮，隐藏用户菜单 =====
+        loginNavItem.classList.remove('d-none');
+        userDropdownItem.classList.add('d-none');
+      }
+
+      // ===== 退出登录功能 =====
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          window.location.href = 'login.html';
+        });
+      }
+    });
+
+    // form submission simulation
+    document.getElementById('createEventForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // show toast
+      const toast = new bootstrap.Toast(document.getElementById('successToast'));
+      toast.show();
+    });
+
+    // preview modal - simple live update (basic)
+    document.getElementById('previewModal').addEventListener('show.bs.modal', function() {
+      const title = document.getElementById('eventTitle').value || '[Event title]';
+      const category = document.getElementById('eventCategory').value || 'Category';
+      const instructor = document.getElementById('eventInstructor').value || '[Instructor]';
+      const venue = document.getElementById('eventVenue').value || '[Venue]';
+      
+      document.getElementById('previewTitle').textContent = title;
+      document.getElementById('previewCategory').textContent = category;
+      document.getElementById('previewInstructor').textContent = instructor;
+      document.getElementById('previewVenue').textContent = venue;
+    });
+  </script>
+</body>
+</html>
